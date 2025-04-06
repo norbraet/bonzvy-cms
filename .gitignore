@@ -1,48 +1,53 @@
-# Wordpress - ignore core, configuration, examples, uploads and logs.
-# https://github.com/github/gitignore/blob/main/WordPress.gitignore
+# Ignore the WordPress core files and directories
+wp-admin/
+wp-includes/
+wp-content/upgrade/
 
-# Core
-#
-# Note: if you want to stage/commit WP core files
-# you can delete this whole section/until Configuration.
-/wp-admin/
-/wp-content/index.php
-/wp-content/languages
-/wp-content/plugins/index.php
-/wp-content/themes/index.php
-/wp-includes/
-/index.php
-/license.txt
-/readme.html
-/wp-*.php
-/xmlrpc.php
+# Ignore the wp-content directory except for plugins and uploads
+wp-content/*
+!wp-content/plugins/
+!wp-content/uploads/
 
-# Configuration
+# Ignore configuration and sensitive files
 wp-config.php
+wp-config-sample.php
+.htaccess
 
-# Example themes
-/wp-content/themes/twenty*/
-
-# Example plugin
-/wp-content/plugins/hello.php
-
-# Uploads
-/wp-content/uploads/
-
-# Log files
+# Ignore local development environment files
 *.log
+*.sql
+*.tar.gz
+*.zip
+*.bak
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
 
-# htaccess
-/.htaccess
+# Ignore Docker and environment configuration files (optional)
+docker-compose.override.yml
+.env
 
-# All plugins
-#
-# Note: If you wish to whitelist plugins,
-# uncomment the next line
-#/wp-content/plugins
+# Ignore temporary files
+*.tmp
 
-# All themes
-#
-# Note: If you wish to whitelist themes,
-# uncomment the next line
-#/wp-content/themes
+# Ignore backups and archives
+*.bak
+*.backup
+*.gz
+*.tar
+*.tgz
+
+# Ignore PHPUnit cache files (if you use PHPUnit for testing)
+phpunit.xml
+phpunit.xml.dist
+test/
+
+# Ignore IDE files (if you're using VSCode, Sublime, PhpStorm, etc.)
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Ignore Composer vendor folder (if using Composer)
+vendor/
