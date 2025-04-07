@@ -2,31 +2,48 @@ version: '3'
 
 services:
   payload:
+    container_name: payload-cms
     image: node:18-alpine
     ports:
-      - '3000:3000'
+      - '${PAYLOAD_PORT}:${PAYLOAD_PORT}'
     volumes:
       - .:/home/node/app
       - node_modules:/home/node/app/node_modules
     working_dir: /home/node/app/
-    command: sh -c "corepack enable && corepack prepare pnpm@latest --activate && pnpm install && pnpm dev"
+    command: >
+      sh -c "
+        corepack enable && 
+        corepack prepare pnpm@latest --activate && 
+        pnpm install && pnpm dev
+      "
     depends_on:
       - mongo
     env_file:
       - .env
+    networks:
+      - payload-net
 
   # Ensure your DATABASE_URI uses 'mongo' as the hostname ie. mongodb://mongo/my-db-name
   mongo:
+    container_name: mongo-db
     image: mongo:latest
     ports:
-      - '27017:27017'
+      - '${MONGO_DB_PORT}:${MONGO_DB_PORT}'
     command:
       - --storageEngine=wiredTiger
     volumes:
-      - data:/data/db
+      - mongo-data:/data/db
     logging:
       driver: none
+    env_file:
+      - .env
+    networks:
+      - payload-net
 
 volumes:
-  data:
+  mongo-data:
   node_modules:
+
+networks:
+  payload-net:
+    driver: bridge
