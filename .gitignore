@@ -1,53 +1,46 @@
-# Ignore the WordPress core files and directories
-wp-admin/
-wp-includes/
-wp-content/upgrade/
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# Ignore the wp-content directory except for plugins and uploads
-wp-content/*
-!wp-content/plugins/
-!wp-content/uploads/
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+.yarn/install-state.gz
 
-# Ignore configuration and sensitive files
-wp-config.php
-wp-config-sample.php
-.htaccess
+/.idea/*
+!/.idea/runConfigurations
 
-# Ignore local development environment files
-*.log
-*.sql
-*.tar.gz
-*.zip
-*.bak
-*.swp
-*.swo
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
 .DS_Store
-Thumbs.db
+*.pem
 
-# Ignore Docker and environment configuration files (optional)
-docker-compose.override.yml
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# local env files
+.env*.local
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
 .env
 
-# Ignore temporary files
-*.tmp
+/media
 
-# Ignore backups and archives
-*.bak
-*.backup
-*.gz
-*.tar
-*.tgz
-
-# Ignore PHPUnit cache files (if you use PHPUnit for testing)
-phpunit.xml
-phpunit.xml.dist
-test/
-
-# Ignore IDE files (if you're using VSCode, Sublime, PhpStorm, etc.)
-.vscode/
-.idea/
-*.sublime-workspace
-*.sublime-project
-
-# Ignore Composer vendor folder (if using Composer)
-vendor/
+.pnpm-store/*
+.vscode
