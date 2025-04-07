@@ -69,6 +69,7 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
+    beats: Beat;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -77,6 +78,7 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    beats: BeatsSelect<false> | BeatsSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -151,6 +153,110 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "beats".
+ */
+export interface Beat {
+  id: string;
+  title: string;
+  artwork: string | Media;
+  description?: string | null;
+  trackType: 'Beat' | 'Beat with Hook' | 'Topline' | 'Vocal';
+  visibility?: ('Public' | 'Private' | 'Unlisted') | null;
+  releaseDate?: string | null;
+  includingInBulkDiscounts?: boolean | null;
+  allowCoupons?: boolean | null;
+  untagged: string | Media;
+  tagged?: (string | null) | Media;
+  stems?: (string | null) | Media;
+  tags?:
+    | {
+        tag?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  genres?:
+    | {
+        genre?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  key?: ('C' | 'C#' | 'D' | 'D#' | 'E' | 'F' | 'F#' | 'G' | 'G#' | 'A' | 'B') | null;
+  mode?:
+    | (
+        | 'Major'
+        | 'Natural Minor'
+        | 'Melodic Minor'
+        | 'Harmonic Minor'
+        | 'Major Pentatonic'
+        | 'Minor Pentatonic'
+        | 'Blues'
+        | 'Dorian'
+        | 'Mixolydian'
+        | 'Phrygian'
+      )
+    | null;
+  BPM?: number | null;
+  moods?:
+    | {
+        mood?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  instruments?:
+    | {
+        instrument?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  nonExclusiveLicenses?:
+    | {
+        name?: string | null;
+        downloads?: ('MP3' | 'MP3, WAV' | 'MP3, WAV, Stems') | null;
+        price?: number | null;
+        active?: boolean | null;
+        id?: string | null;
+      }[]
+    | null;
+  exclusiveLicense?: {
+    makeOfferOnly?: boolean | null;
+    price?: number | null;
+    downloads?: 'MP3, WAV, Stems' | null;
+    active?: boolean | null;
+  };
+  freeDownload?:
+    | {
+        name?: string | null;
+        downloads?: 'MP3' | null;
+        active?: boolean | null;
+        id?: string | null;
+      }[]
+    | null;
+  Others?: {
+    voiceTags?:
+      | {
+          name: string;
+          audio: string | Media;
+          isDefault?: boolean | null;
+          published?: boolean | null;
+          id?: string | null;
+        }[]
+      | null;
+    collaborations?: {
+      thirdPartySamples?: boolean | null;
+      samples?:
+        | {
+            sampleOrLoop?: string | null;
+            source?: string | null;
+            id?: string | null;
+          }[]
+        | null;
+    };
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -163,6 +269,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'media';
         value: string | Media;
+      } | null)
+    | ({
+        relationTo: 'beats';
+        value: string | Beat;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -238,6 +348,102 @@ export interface MediaSelect<T extends boolean = true> {
   height?: T;
   focalX?: T;
   focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "beats_select".
+ */
+export interface BeatsSelect<T extends boolean = true> {
+  title?: T;
+  artwork?: T;
+  description?: T;
+  trackType?: T;
+  visibility?: T;
+  releaseDate?: T;
+  includingInBulkDiscounts?: T;
+  allowCoupons?: T;
+  untagged?: T;
+  tagged?: T;
+  stems?: T;
+  tags?:
+    | T
+    | {
+        tag?: T;
+        id?: T;
+      };
+  genres?:
+    | T
+    | {
+        genre?: T;
+        id?: T;
+      };
+  key?: T;
+  mode?: T;
+  BPM?: T;
+  moods?:
+    | T
+    | {
+        mood?: T;
+        id?: T;
+      };
+  instruments?:
+    | T
+    | {
+        instrument?: T;
+        id?: T;
+      };
+  nonExclusiveLicenses?:
+    | T
+    | {
+        name?: T;
+        downloads?: T;
+        price?: T;
+        active?: T;
+        id?: T;
+      };
+  exclusiveLicense?:
+    | T
+    | {
+        makeOfferOnly?: T;
+        price?: T;
+        downloads?: T;
+        active?: T;
+      };
+  freeDownload?:
+    | T
+    | {
+        name?: T;
+        downloads?: T;
+        active?: T;
+        id?: T;
+      };
+  Others?:
+    | T
+    | {
+        voiceTags?:
+          | T
+          | {
+              name?: T;
+              audio?: T;
+              isDefault?: T;
+              published?: T;
+              id?: T;
+            };
+        collaborations?:
+          | T
+          | {
+              thirdPartySamples?: T;
+              samples?:
+                | T
+                | {
+                    sampleOrLoop?: T;
+                    source?: T;
+                    id?: T;
+                  };
+            };
+      };
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
