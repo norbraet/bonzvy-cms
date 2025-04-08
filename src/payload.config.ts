@@ -31,7 +31,7 @@ export default buildConfig({
       admin: {
         group: 'Content',
         description:
-          'Here you can see all the beats that are uploaded or you can upload a new beat.',
+          'Manage your uploaded beats here. You can browse existing entries or add new beats to your catalog.',
       },
     },
 
@@ -41,7 +41,7 @@ export default buildConfig({
       admin: {
         group: 'Media',
         description:
-          'Here you can see all the Images that are uploaded or you can upload a new image.',
+          'This section stores all uploaded image assets. Upload cover art, thumbnails, and other visuals.',
       },
     },
     {
@@ -49,7 +49,7 @@ export default buildConfig({
       admin: {
         group: 'Media',
         description:
-          'Here you can see all the Zip Files that are uploaded or you can upload a new Zip File.',
+          'Manage all uploaded zip files, such as project stems, sound kits, or bundled resources.',
       },
     },
     {
@@ -57,12 +57,18 @@ export default buildConfig({
       admin: {
         group: 'Media',
         description:
-          'Here you can see all the Audio Files that are uploaded or you can upload a new Audio File.',
+          'Upload and manage your audio files including WAV, MP3, and other formats used in your productions.',
       },
     },
 
     // Users
-    { ...Users, admin: { group: 'Access' } },
+    {
+      ...Users,
+      admin: {
+        group: 'Access',
+        description: 'Control user access, roles, and credentials for managing the platform.',
+      },
+    },
   ],
 
   editor: lexicalEditor(),
