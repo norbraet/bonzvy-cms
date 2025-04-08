@@ -24,7 +24,7 @@ export const Beats: CollectionConfig = {
                 {
                   name: 'artwork',
                   type: 'upload',
-                  relationTo: 'media',
+                  relationTo: 'images',
                   required: true,
                   displayPreview: true,
                   admin: {
@@ -91,18 +91,18 @@ export const Beats: CollectionConfig = {
             {
               name: 'untagged',
               type: 'upload',
-              relationTo: 'media',
+              relationTo: 'audio',
               required: true,
             },
             {
               name: 'tagged',
               type: 'upload',
-              relationTo: 'media',
+              relationTo: 'audio',
             },
             {
               name: 'stems',
               type: 'upload',
-              relationTo: 'media',
+              relationTo: 'zips',
             },
           ],
         },
@@ -291,7 +291,7 @@ export const Beats: CollectionConfig = {
                 {
                   name: 'audio',
                   type: 'upload',
-                  relationTo: 'media',
+                  relationTo: 'audio',
                   required: true,
                 },
                 {
