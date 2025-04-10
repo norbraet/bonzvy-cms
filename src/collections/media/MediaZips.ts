@@ -12,6 +12,12 @@ export const MediaZips: CollectionConfig = {
     },
   ],
   upload: {
-    mimeTypes: ['application/zip'],
+    staticDir: 'public/uploads/zips',
+    mimeTypes: [
+      'application/zip',
+      'application/x-zip-compressed',
+      'application/vnd.rar',
+      'application/x-rar-compressed',
+    ],
   },
 }
