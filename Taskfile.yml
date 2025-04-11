@@ -37,14 +37,8 @@ tasks:
     internal: true
     cmds:
       - |
-        if [ "{{OS}}" = "windows" ]; then
-          md %DB_DUMP_DIR%
-        else
-          mkdir -p $DB_DUMP_DIR
+        if [ "{{OS}}" = "windows" ]; then 
+          mkdir $DB_DUMP_DIR 
+        else 
+          mkdir -p $DB_DUMP_DIR 
         fi
-
-  create-dump-dir2:
-    desc: Creates directory for the dump based on the OS
-    internal: true
-    cmds:
-      - "echo ja"
