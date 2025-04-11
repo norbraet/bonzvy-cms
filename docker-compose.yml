@@ -23,12 +23,12 @@ services:
     networks:
       - payload-net
 
-  # Ensure your DATABASE_URI uses 'mongo' as the hostname ie. mongodb://mongo/my-db-name
+  # Ensure your DB_URI uses 'mongo' as the hostname ie. mongodb://mongo/my-db-name
   mongo:
-    container_name: mongo-db
+    container_name: '${DB_CONTAINER_NAME}'
     image: mongo:latest
     ports:
-      - '${MONGO_DB_PORT}:${MONGO_DB_PORT}'
+      - '${DB_PORT}:${DB_PORT}'
     command:
       - --storageEngine=wiredTiger
     volumes:

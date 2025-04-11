@@ -1,10 +1,10 @@
 import { CollectionConfig } from 'payload'
 
-export const MediaAudio: CollectionConfig = {
-  slug: 'media-audio',
+export const License: CollectionConfig = {
+  slug: 'license',
   admin: {
     useAsTitle: 'name',
-    group: 'Media',
+    group: 'Licenses',
     description: '',
     // defaultColumns: ['name', 'key', 'BPM', 'visibility', 'artwork'],
   },

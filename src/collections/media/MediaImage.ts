@@ -1,7 +1,7 @@
 import { CollectionConfig } from 'payload'
 
-export const MediaAudio: CollectionConfig = {
-  slug: 'media-audio',
+export const MediaImage: CollectionConfig = {
+  slug: 'media-image',
   admin: {
     useAsTitle: 'name',
     group: 'Media',

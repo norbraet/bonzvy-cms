@@ -1,10 +1,10 @@
 import { CollectionConfig } from 'payload'
 
-export const MediaAudio: CollectionConfig = {
-  slug: 'media-audio',
+export const MediaZipType: CollectionConfig = {
+  slug: 'media-zip-type',
   admin: {
     useAsTitle: 'name',
-    group: 'Media',
+    group: 'Licenses',
     description: '',
     // defaultColumns: ['name', 'key', 'BPM', 'visibility', 'artwork'],
   },

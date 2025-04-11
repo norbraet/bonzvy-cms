@@ -1,18 +1,18 @@
 import type { CollectionConfig } from 'payload'
 
-export const MediaImages: CollectionConfig = {
-  slug: 'images',
+export const MediaAudio: CollectionConfig = {
+  slug: 'audio',
   access: {
     read: () => true,
   },
   fields: [
     {
       name: 'alt',
-      type: 'text',
-      required: true,
+      type: 'textarea',
     },
   ],
   upload: {
-    mimeTypes: ['image/*'],
+    staticDir: 'public/uploads/media',
+    mimeTypes: ['audio/*'],
   },
 }

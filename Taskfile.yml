@@ -1,0 +1,50 @@
+version: '3'
+
+dotenv: ['.env']
+
+output: prefixed
+
+tasks:
+  default:
+    cmds:
+      - task --list
+    silent: true
+
+  db:export:
+    desc: Export MongoDB database from Docker container to local folder
+    cmds:
+      - echo "Start creating dump..."
+      - task: create-dump-dir
+      - docker exec $DB_CONTAINER_NAME mongodump --archive --gzip --db $DB_NAME > $DB_DUMP_DIR/dump.$ENVIRONMENT.gz
+      - echo "Database dump completed"
+
+  db:export2:
+    desc: Export MongoDB database from Docker container to local folder
+    cmds:
+      - echo "Start creating dump..."
+      - task: create-dump-dir2
+      - echo "Database dump completed"
+
+  db:import:
+    desc: Import MongoDB database into Docker container from local archive
+    cmds:
+      - echo "Start importing dump"
+      - docker exec -i $DB_CONTAINER_NAME mongorestore --archive --gzip --drop < $DB_DUMP_DIR/dump.$ENVIRONMENT.gz
+      - echo "Database dump imported"
+
+  create-dump-dir:
+    desc: Creates directory for the dump based on the OS
+    internal: true
+    cmds:
+      - |
+        if [ "{{OS}}" = "windows" ]; then
+          md %DB_DUMP_DIR%
+        else
+          mkdir -p $DB_DUMP_DIR
+        fi
+
+  create-dump-dir2:
+    desc: Creates directory for the dump based on the OS
+    internal: true
+    cmds:
+      - "echo ja"

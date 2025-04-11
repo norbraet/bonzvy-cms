@@ -67,10 +67,22 @@ export interface Config {
   };
   blocks: {};
   collections: {
-    beats: Beat;
-    images: Image;
-    zips: Zip;
-    audio: Audio;
+    beat: Beat;
+    license: License;
+    'license-type': LicenseType;
+    'media-audio-type': MediaAudioType;
+    'media-zip-type': MediaZipType;
+    'media-audio': MediaAudio;
+    'media-image': MediaImage;
+    'media-zip': MediaZip;
+    genre: Genre;
+    instrument: Instrument;
+    key: Key;
+    mode: Mode;
+    tag: Tag;
+    'type-beat': TypeBeat;
+    'track-type': TrackType;
+    visibility: Visibility;
     users: User;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -78,10 +90,22 @@ export interface Config {
   };
   collectionsJoins: {};
   collectionsSelect: {
-    beats: BeatsSelect<false> | BeatsSelect<true>;
-    images: ImagesSelect<false> | ImagesSelect<true>;
-    zips: ZipsSelect<false> | ZipsSelect<true>;
-    audio: AudioSelect<false> | AudioSelect<true>;
+    beat: BeatSelect<false> | BeatSelect<true>;
+    license: LicenseSelect<false> | LicenseSelect<true>;
+    'license-type': LicenseTypeSelect<false> | LicenseTypeSelect<true>;
+    'media-audio-type': MediaAudioTypeSelect<false> | MediaAudioTypeSelect<true>;
+    'media-zip-type': MediaZipTypeSelect<false> | MediaZipTypeSelect<true>;
+    'media-audio': MediaAudioSelect<false> | MediaAudioSelect<true>;
+    'media-image': MediaImageSelect<false> | MediaImageSelect<true>;
+    'media-zip': MediaZipSelect<false> | MediaZipSelect<true>;
+    genre: GenreSelect<false> | GenreSelect<true>;
+    instrument: InstrumentSelect<false> | InstrumentSelect<true>;
+    key: KeySelect<false> | KeySelect<true>;
+    mode: ModeSelect<false> | ModeSelect<true>;
+    tag: TagSelect<false> | TagSelect<true>;
+    'type-beat': TypeBeatSelect<false> | TypeBeatSelect<true>;
+    'track-type': TrackTypeSelect<false> | TrackTypeSelect<true>;
+    visibility: VisibilitySelect<false> | VisibilitySelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -120,175 +144,169 @@ export interface UserAuthOperations {
   };
 }
 /**
- * Here you can see all the beats that are uploaded or you can upload a new beat.
- *
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "beats".
+ * via the `definition` "beat".
  */
 export interface Beat {
   id: string;
-  title: string;
-  artwork: string | Image;
-  description?: string | null;
-  trackType: 'Beat' | 'Beat with Hook' | 'Topline' | 'Vocal';
-  visibility?: ('Public' | 'Private' | 'Unlisted') | null;
-  releaseDate?: string | null;
-  includingInBulkDiscounts?: boolean | null;
-  allowCoupons?: boolean | null;
-  untagged: string | Audio;
-  tagged?: (string | null) | Audio;
-  stems?: (string | null) | Zip;
-  tags?:
-    | {
-        tag?: string | null;
-        id?: string | null;
-      }[]
-    | null;
-  genres?:
-    | {
-        genre?: string | null;
-        id?: string | null;
-      }[]
-    | null;
-  key?: ('C' | 'C#' | 'D' | 'D#' | 'E' | 'F' | 'F#' | 'G' | 'G#' | 'A' | 'B') | null;
-  mode?:
-    | (
-        | 'Major'
-        | 'Natural Minor'
-        | 'Melodic Minor'
-        | 'Harmonic Minor'
-        | 'Major Pentatonic'
-        | 'Minor Pentatonic'
-        | 'Blues'
-        | 'Dorian'
-        | 'Mixolydian'
-        | 'Phrygian'
-      )
-    | null;
-  BPM?: number | null;
-  moods?:
-    | {
-        mood?: string | null;
-        id?: string | null;
-      }[]
-    | null;
-  instruments?:
-    | {
-        instrument?: string | null;
-        id?: string | null;
-      }[]
-    | null;
-  nonExclusiveLicenses?:
-    | {
-        name?: string | null;
-        downloads?: ('MP3' | 'MP3, WAV' | 'MP3, WAV, Stems') | null;
-        price?: number | null;
-        active?: boolean | null;
-        id?: string | null;
-      }[]
-    | null;
-  exclusiveLicense?: {
-    makeOfferOnly?: boolean | null;
-    price?: number | null;
-    downloads?: 'MP3, WAV, Stems' | null;
-    active?: boolean | null;
-  };
-  freeDownload?:
-    | {
-        name?: string | null;
-        downloads?: 'MP3' | null;
-        active?: boolean | null;
-        id?: string | null;
-      }[]
-    | null;
-  Others?: {
-    voiceTags?:
-      | {
-          name: string;
-          audio: string | Audio;
-          isDefault?: boolean | null;
-          published?: boolean | null;
-          id?: string | null;
-        }[]
-      | null;
-    collaborations?: {
-      thirdPartySamples?: boolean | null;
-      samples?:
-        | {
-            sampleOrLoop?: string | null;
-            source?: string | null;
-            id?: string | null;
-          }[]
-        | null;
-    };
-  };
+  name: string;
   updatedAt: string;
   createdAt: string;
 }
 /**
- * Here you can see all the Images that are uploaded or you can upload a new image.
- *
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "images".
+ * via the `definition` "license".
  */
-export interface Image {
+export interface License {
   id: string;
-  alt: string;
+  name: string;
   updatedAt: string;
   createdAt: string;
-  url?: string | null;
-  thumbnailURL?: string | null;
-  filename?: string | null;
-  mimeType?: string | null;
-  filesize?: number | null;
-  width?: number | null;
-  height?: number | null;
-  focalX?: number | null;
-  focalY?: number | null;
 }
 /**
- * Here you can see all the Audio Files that are uploaded or you can upload a new Audio File.
- *
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "audio".
+ * via the `definition` "license-type".
  */
-export interface Audio {
+export interface LicenseType {
   id: string;
-  alt?: string | null;
+  name: string;
   updatedAt: string;
   createdAt: string;
-  url?: string | null;
-  thumbnailURL?: string | null;
-  filename?: string | null;
-  mimeType?: string | null;
-  filesize?: number | null;
-  width?: number | null;
-  height?: number | null;
-  focalX?: number | null;
-  focalY?: number | null;
 }
 /**
- * Here you can see all the Zip Files that are uploaded or you can upload a new Zip File.
- *
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "zips".
+ * via the `definition` "media-audio-type".
  */
-export interface Zip {
+export interface MediaAudioType {
   id: string;
-  notes?: string | null;
+  name: string;
   updatedAt: string;
   createdAt: string;
-  url?: string | null;
-  thumbnailURL?: string | null;
-  filename?: string | null;
-  mimeType?: string | null;
-  filesize?: number | null;
-  width?: number | null;
-  height?: number | null;
-  focalX?: number | null;
-  focalY?: number | null;
 }
 /**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media-zip-type".
+ */
+export interface MediaZipType {
+  id: string;
+  name: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media-audio".
+ */
+export interface MediaAudio {
+  id: string;
+  name: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media-image".
+ */
+export interface MediaImage {
+  id: string;
+  name: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media-zip".
+ */
+export interface MediaZip {
+  id: string;
+  name: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "genre".
+ */
+export interface Genre {
+  id: string;
+  name: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "instrument".
+ */
+export interface Instrument {
+  id: string;
+  name: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "key".
+ */
+export interface Key {
+  id: string;
+  name: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "mode".
+ */
+export interface Mode {
+  id: string;
+  name: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tag".
+ */
+export interface Tag {
+  id: string;
+  name: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "type-beat".
+ */
+export interface TypeBeat {
+  id: string;
+  name: string;
+  genre?: (string | Genre)[] | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "track-type".
+ */
+export interface TrackType {
+  id: string;
+  name: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "visibility".
+ */
+export interface Visibility {
+  id: string;
+  name: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Control user access, roles, and credentials for managing the platform.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users".
  */
@@ -313,20 +331,68 @@ export interface PayloadLockedDocument {
   id: string;
   document?:
     | ({
-        relationTo: 'beats';
+        relationTo: 'beat';
         value: string | Beat;
       } | null)
     | ({
-        relationTo: 'images';
-        value: string | Image;
+        relationTo: 'license';
+        value: string | License;
       } | null)
     | ({
-        relationTo: 'zips';
-        value: string | Zip;
+        relationTo: 'license-type';
+        value: string | LicenseType;
       } | null)
     | ({
-        relationTo: 'audio';
-        value: string | Audio;
+        relationTo: 'media-audio-type';
+        value: string | MediaAudioType;
+      } | null)
+    | ({
+        relationTo: 'media-zip-type';
+        value: string | MediaZipType;
+      } | null)
+    | ({
+        relationTo: 'media-audio';
+        value: string | MediaAudio;
+      } | null)
+    | ({
+        relationTo: 'media-image';
+        value: string | MediaImage;
+      } | null)
+    | ({
+        relationTo: 'media-zip';
+        value: string | MediaZip;
+      } | null)
+    | ({
+        relationTo: 'genre';
+        value: string | Genre;
+      } | null)
+    | ({
+        relationTo: 'instrument';
+        value: string | Instrument;
+      } | null)
+    | ({
+        relationTo: 'key';
+        value: string | Key;
+      } | null)
+    | ({
+        relationTo: 'mode';
+        value: string | Mode;
+      } | null)
+    | ({
+        relationTo: 'tag';
+        value: string | Tag;
+      } | null)
+    | ({
+        relationTo: 'type-beat';
+        value: string | TypeBeat;
+      } | null)
+    | ({
+        relationTo: 'track-type';
+        value: string | TrackType;
+      } | null)
+    | ({
+        relationTo: 'visibility';
+        value: string | Visibility;
       } | null)
     | ({
         relationTo: 'users';
@@ -376,153 +442,148 @@ export interface PayloadMigration {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "beats_select".
+ * via the `definition` "beat_select".
  */
-export interface BeatsSelect<T extends boolean = true> {
-  title?: T;
-  artwork?: T;
-  description?: T;
-  trackType?: T;
-  visibility?: T;
-  releaseDate?: T;
-  includingInBulkDiscounts?: T;
-  allowCoupons?: T;
-  untagged?: T;
-  tagged?: T;
-  stems?: T;
-  tags?:
-    | T
-    | {
-        tag?: T;
-        id?: T;
-      };
-  genres?:
-    | T
-    | {
-        genre?: T;
-        id?: T;
-      };
-  key?: T;
-  mode?: T;
-  BPM?: T;
-  moods?:
-    | T
-    | {
-        mood?: T;
-        id?: T;
-      };
-  instruments?:
-    | T
-    | {
-        instrument?: T;
-        id?: T;
-      };
-  nonExclusiveLicenses?:
-    | T
-    | {
-        name?: T;
-        downloads?: T;
-        price?: T;
-        active?: T;
-        id?: T;
-      };
-  exclusiveLicense?:
-    | T
-    | {
-        makeOfferOnly?: T;
-        price?: T;
-        downloads?: T;
-        active?: T;
-      };
-  freeDownload?:
-    | T
-    | {
-        name?: T;
-        downloads?: T;
-        active?: T;
-        id?: T;
-      };
-  Others?:
-    | T
-    | {
-        voiceTags?:
-          | T
-          | {
-              name?: T;
-              audio?: T;
-              isDefault?: T;
-              published?: T;
-              id?: T;
-            };
-        collaborations?:
-          | T
-          | {
-              thirdPartySamples?: T;
-              samples?:
-                | T
-                | {
-                    sampleOrLoop?: T;
-                    source?: T;
-                    id?: T;
-                  };
-            };
-      };
+export interface BeatSelect<T extends boolean = true> {
+  name?: T;
   updatedAt?: T;
   createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "images_select".
+ * via the `definition` "license_select".
  */
-export interface ImagesSelect<T extends boolean = true> {
-  alt?: T;
+export interface LicenseSelect<T extends boolean = true> {
+  name?: T;
   updatedAt?: T;
   createdAt?: T;
-  url?: T;
-  thumbnailURL?: T;
-  filename?: T;
-  mimeType?: T;
-  filesize?: T;
-  width?: T;
-  height?: T;
-  focalX?: T;
-  focalY?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "zips_select".
+ * via the `definition` "license-type_select".
  */
-export interface ZipsSelect<T extends boolean = true> {
-  notes?: T;
+export interface LicenseTypeSelect<T extends boolean = true> {
+  name?: T;
   updatedAt?: T;
   createdAt?: T;
-  url?: T;
-  thumbnailURL?: T;
-  filename?: T;
-  mimeType?: T;
-  filesize?: T;
-  width?: T;
-  height?: T;
-  focalX?: T;
-  focalY?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "audio_select".
+ * via the `definition` "media-audio-type_select".
  */
-export interface AudioSelect<T extends boolean = true> {
-  alt?: T;
+export interface MediaAudioTypeSelect<T extends boolean = true> {
+  name?: T;
   updatedAt?: T;
   createdAt?: T;
-  url?: T;
-  thumbnailURL?: T;
-  filename?: T;
-  mimeType?: T;
-  filesize?: T;
-  width?: T;
-  height?: T;
-  focalX?: T;
-  focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media-zip-type_select".
+ */
+export interface MediaZipTypeSelect<T extends boolean = true> {
+  name?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media-audio_select".
+ */
+export interface MediaAudioSelect<T extends boolean = true> {
+  name?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media-image_select".
+ */
+export interface MediaImageSelect<T extends boolean = true> {
+  name?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media-zip_select".
+ */
+export interface MediaZipSelect<T extends boolean = true> {
+  name?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "genre_select".
+ */
+export interface GenreSelect<T extends boolean = true> {
+  name?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "instrument_select".
+ */
+export interface InstrumentSelect<T extends boolean = true> {
+  name?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "key_select".
+ */
+export interface KeySelect<T extends boolean = true> {
+  name?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "mode_select".
+ */
+export interface ModeSelect<T extends boolean = true> {
+  name?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tag_select".
+ */
+export interface TagSelect<T extends boolean = true> {
+  name?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "type-beat_select".
+ */
+export interface TypeBeatSelect<T extends boolean = true> {
+  name?: T;
+  genre?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "track-type_select".
+ */
+export interface TrackTypeSelect<T extends boolean = true> {
+  name?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "visibility_select".
+ */
+export interface VisibilitySelect<T extends boolean = true> {
+  name?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
