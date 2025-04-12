@@ -1,0 +1,20 @@
+FROM node:23-alpine
+
+# Set the working directory in the container
+WORKDIR /home/node/app
+
+# Copy package.json and pnpm-lock.yaml first to leverage Docker caching
+COPY package.json pnpm-lock.yaml ./
+
+# Install pnpm (latest version) and install dependencies
+RUN corepack enable
+RUN corepack prepare pnpm@latest --activate && pnpm install
+
+# Copy the rest of the application code
+COPY . .
+
+# Expose the development server port (usually 3000 for Next.js or Payload)
+EXPOSE ${PAYLOAD_PORT}
+
+# Run pnpm dev for development (this is the equivalent of your previous command)
+CMD ["pnpm", "dev"]
