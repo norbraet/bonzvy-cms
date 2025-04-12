@@ -42,7 +42,7 @@ next-env.d.ts
 
 /media
 
-.pnpm-store/*
+.pnpm-store
 .vscode
 public
 db_dumps
