@@ -20,7 +20,7 @@ services:
   # Ensure your DB_URI uses 'mongo' as the hostname ie. mongodb://mongo/my-db-name
   mongo:
     container_name: '${DB_CONTAINER_NAME}'
-    image: mongo:latest
+    image: mongo:8.0.6
     ports:
       - '${DB_PORT}:${DB_PORT}'
     command:
