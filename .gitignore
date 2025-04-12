@@ -44,5 +44,5 @@ next-env.d.ts
 
 .pnpm-store/*
 .vscode
-public/*
-db_dumps/*
+public
+db_dumps
