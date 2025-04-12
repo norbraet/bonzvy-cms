@@ -150,6 +150,70 @@ export interface UserAuthOperations {
 export interface Beat {
   id: string;
   name: string;
+  artwork?: (string | null) | MediaImage;
+  description?: string | null;
+  wavUpload: string | MediaAudio;
+  mp3Version?: (string | null) | MediaAudio;
+  previewVersion?: (string | null) | MediaAudio;
+  mp3?: (string | null) | MediaAudio;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media-image".
+ */
+export interface MediaImage {
+  id: string;
+  name: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media-audio".
+ */
+export interface MediaAudio {
+  id: string;
+  description?: string | null;
+  audioType: string | MediaAudioType;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+  sizes?: {
+    small?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    large?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media-audio-type".
+ */
+export interface MediaAudioType {
+  id: string;
+  name: string;
   updatedAt: string;
   createdAt: string;
 }
@@ -175,39 +239,9 @@ export interface LicenseType {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "media-audio-type".
- */
-export interface MediaAudioType {
-  id: string;
-  name: string;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "media-zip-type".
  */
 export interface MediaZipType {
-  id: string;
-  name: string;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "media-audio".
- */
-export interface MediaAudio {
-  id: string;
-  name: string;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "media-image".
- */
-export interface MediaImage {
   id: string;
   name: string;
   updatedAt: string;
@@ -446,6 +480,12 @@ export interface PayloadMigration {
  */
 export interface BeatSelect<T extends boolean = true> {
   name?: T;
+  artwork?: T;
+  description?: T;
+  wavUpload?: T;
+  mp3Version?: T;
+  previewVersion?: T;
+  mp3?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -490,9 +530,43 @@ export interface MediaZipTypeSelect<T extends boolean = true> {
  * via the `definition` "media-audio_select".
  */
 export interface MediaAudioSelect<T extends boolean = true> {
-  name?: T;
+  description?: T;
+  audioType?: T;
   updatedAt?: T;
   createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+  sizes?:
+    | T
+    | {
+        small?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        large?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+      };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
