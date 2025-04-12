@@ -9,6 +9,19 @@ tasks:
     cmds:
       - task --list
     silent: true
+  
+  setup:
+    desc: Projet setup
+    cmds:
+      - echo "Initializing project setup..."
+      - echo "Building Docker containers..."
+      - docker compose build
+      - echo "Docker containers have been built successfully."
+      - echo "Installing Node dependencies..."
+      - pnpm install
+      - echo "Node dependencies installed successfully."
+      - echo "Project setup complete!"
+      - echo "To start the project, run task docker:up"
 
   db:export:
     desc: Export MongoDB database from Docker container to local folder
@@ -21,7 +34,7 @@ tasks:
   db:import:
     desc: Import MongoDB database into Docker container from local archive
     vars:
-      ENV: '{{.ENV | default (env "ENVIRONMENT")}}'
+      ENV: '{{.ENV | default .ENVIRONMENT}}'
     cmds:
       - echo "Start importing {{.ENV}} dump"
       - docker exec -i $DB_CONTAINER_NAME mongorestore --archive --gzip --drop < $DB_DUMP_DIR/cms.{{.ENV}}.gz

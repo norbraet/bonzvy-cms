@@ -1,21 +1,15 @@
-version: '3'
-
 services:
   payload:
     container_name: payload-cms
-    image: node:18-alpine
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
     ports:
       - '${PAYLOAD_PORT}:${PAYLOAD_PORT}'
     volumes:
       - .:/home/node/app
-      - ./node_modules:/home/node/app/node_modules
+      - node_modules:/home/node/app/node_modules
     working_dir: /home/node/app/
-    command: >
-      sh -c "
-        corepack enable && 
-        corepack prepare pnpm@latest --activate && 
-        pnpm install && pnpm dev
-      "
     depends_on:
       - mongo
     env_file:
