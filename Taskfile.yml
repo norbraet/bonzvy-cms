@@ -15,21 +15,16 @@ tasks:
     cmds:
       - echo "Start creating dump..."
       - task: create-dump-dir
-      - docker exec $DB_CONTAINER_NAME mongodump --archive --gzip --db $DB_NAME > $DB_DUMP_DIR/dump.$ENVIRONMENT.gz
-      - echo "Database dump completed"
-
-  db:export2:
-    desc: Export MongoDB database from Docker container to local folder
-    cmds:
-      - echo "Start creating dump..."
-      - task: create-dump-dir2
+      - docker exec $DB_CONTAINER_NAME mongodump --archive --gzip --db $DB_NAME > $DB_DUMP_DIR/cms.$ENVIRONMENT.gz
       - echo "Database dump completed"
 
   db:import:
     desc: Import MongoDB database into Docker container from local archive
+    vars:
+      ENV: '{{.ENV | default (env "ENVIRONMENT")}}'
     cmds:
-      - echo "Start importing dump"
-      - docker exec -i $DB_CONTAINER_NAME mongorestore --archive --gzip --drop < $DB_DUMP_DIR/dump.$ENVIRONMENT.gz
+      - echo "Start importing {{.ENV}} dump"
+      - docker exec -i $DB_CONTAINER_NAME mongorestore --archive --gzip --drop < $DB_DUMP_DIR/cms.{{.ENV}}.gz
       - echo "Database dump imported"
 
   create-dump-dir:
@@ -42,3 +37,36 @@ tasks:
         else 
           mkdir -p $DB_DUMP_DIR 
         fi
+
+  docker:up:
+    desc: Start all services using docker-compose
+    cmds:
+      - echo "Starting services..."
+      - docker compose up -d
+      - echo "Services started"
+
+  docker:down:
+    desc: Stopp all services using docker-compose
+    cmds:
+      - echo "Stopping services..."
+      - docker-compose down
+      - echo "Services stopped"
+
+  docker:restart:
+    desc: Restart all services using docker-compose
+    cmds:
+      - task docker:down
+      - task docker:up
+
+  docker:logs:
+    desc: View logs for a specific service
+    vars:
+      SERVICE: '{{.SERVICE | default "payload"}}'
+    cmds:
+      - echo "Viewing logs for the {{.SERVICE}} service."
+      - docker-compose logs -f {{.SERVICE}}
+
+  docker:ps:
+    desc: List all running containers
+    cmds:
+      - docker ps
