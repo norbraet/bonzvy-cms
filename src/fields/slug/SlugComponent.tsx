@@ -1,5 +1,5 @@
 'use client'
-import React, { useCallback, useEffect } from 'react'
+import { FC, useCallback, useEffect } from 'react'
 import { TextFieldClientProps } from 'payload'
 
 import { useField, Button, TextInput, FieldLabel, useFormFields, useForm } from '@payloadcms/ui'
@@ -12,7 +12,7 @@ type SlugComponentProps = {
   checkboxFieldPath: string
 } & TextFieldClientProps
 
-export const SlugComponent: React.FC<SlugComponentProps> = ({
+export const SlugComponent: FC<SlugComponentProps> = ({
   field,
   fieldToUse,
   checkboxFieldPath: checkboxFieldPathFromProps,
