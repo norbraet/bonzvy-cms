@@ -13,15 +13,27 @@ tasks:
   setup:
     desc: Projet setup
     cmds:
-      - echo "Initializing project setup..."
-      - echo "Building Docker containers..."
+      - echo "🛠 Initializing project setup..."
+      - task: ensure:lockfile
+      - echo "🐳 Building Docker containers..."
       - docker compose build
-      - echo "Docker containers have been built successfully."
-      - echo "Installing Node dependencies..."
+      - echo "📦 Installing Node dependencies..."
       - pnpm install
-      - echo "Node dependencies installed successfully."
-      - echo "Project setup complete!"
-      - echo "To start the project, run task docker:up"
+      - echo "✅ Project setup complete!"
+      - echo "🚀 To start the project, run task docker:up"
+
+  ensure-lockfile:
+    desc: Ensure pnpm-lock.yaml exists
+    internal: true
+    cmds:
+      - |
+        if [ ! -f pnpm-lock.yaml ]; then
+          echo "🔒 pnpm-lock.yaml not found. Generating..."
+          pnpm install
+          echo "✅ pnpm-lock.yaml generated."
+        else
+          echo "🔒 pnpm-lock.yaml found."
+        fi
 
   db:export:
     desc: Export MongoDB database from Docker container to local folder
