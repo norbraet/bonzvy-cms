@@ -23,7 +23,6 @@ import { Mode } from './collections/metadata/Mode'
 import { Tag } from './collections/metadata/Tag'
 import { TypeBeat } from './collections/metadata/TypeBeat'
 import { TrackType } from './collections/metadata/TrackType'
-import { Visibility } from './collections/metadata/Visibility'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -52,7 +51,6 @@ export default buildConfig({
     Tag,
     TypeBeat,
     TrackType,
-    Visibility,
     Users,
   ],
 
