@@ -155,7 +155,6 @@ export interface Beat {
   wavUpload: string | MediaAudio;
   mp3Version?: (string | null) | MediaAudio;
   previewVersion?: (string | null) | MediaAudio;
-  mp3?: (string | null) | MediaAudio;
   updatedAt: string;
   createdAt: string;
 }
@@ -175,8 +174,10 @@ export interface MediaImage {
  */
 export interface MediaAudio {
   id: string;
-  description?: string | null;
-  audioType: string | MediaAudioType;
+  alt?: string | null;
+  alt2?: string | null;
+  alt3?: string | null;
+  audioType?: (string | null) | MediaAudioType;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -188,24 +189,6 @@ export interface MediaAudio {
   height?: number | null;
   focalX?: number | null;
   focalY?: number | null;
-  sizes?: {
-    small?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
-    large?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
-  };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -224,6 +207,25 @@ export interface MediaAudioType {
 export interface License {
   id: string;
   name: string;
+  description?: string | null;
+  price: number;
+  'Terms of Use'?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  slug?: string | null;
+  slugLock?: boolean | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -485,7 +487,6 @@ export interface BeatSelect<T extends boolean = true> {
   wavUpload?: T;
   mp3Version?: T;
   previewVersion?: T;
-  mp3?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -495,6 +496,11 @@ export interface BeatSelect<T extends boolean = true> {
  */
 export interface LicenseSelect<T extends boolean = true> {
   name?: T;
+  description?: T;
+  price?: T;
+  'Terms of Use'?: T;
+  slug?: T;
+  slugLock?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -530,7 +536,9 @@ export interface MediaZipTypeSelect<T extends boolean = true> {
  * via the `definition` "media-audio_select".
  */
 export interface MediaAudioSelect<T extends boolean = true> {
-  description?: T;
+  alt?: T;
+  alt2?: T;
+  alt3?: T;
   audioType?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -543,30 +551,6 @@ export interface MediaAudioSelect<T extends boolean = true> {
   height?: T;
   focalX?: T;
   focalY?: T;
-  sizes?:
-    | T
-    | {
-        small?:
-          | T
-          | {
-              url?: T;
-              width?: T;
-              height?: T;
-              mimeType?: T;
-              filesize?: T;
-              filename?: T;
-            };
-        large?:
-          | T
-          | {
-              url?: T;
-              width?: T;
-              height?: T;
-              mimeType?: T;
-              filesize?: T;
-              filename?: T;
-            };
-      };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
