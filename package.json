@@ -1,12 +1,12 @@
 {
-  "name": "",
+  "name": "bonzvy-cms",
   "version": "1.0.0",
   "description": "A blank template to get started with Payload 3.0",
   "license": "MIT",
   "type": "module",
   "scripts": {
     "build": "cross-env NODE_OPTIONS=--no-deprecation next build",
-    "dev": "cross-env NODE_OPTIONS=--no-deprecation next dev",
+    "dev": "cross-env NODE_OPTIONS=--no-deprecation nodemon --exec 'next dev'",
     "devsafe": "rm -rf .next && cross-env NODE_OPTIONS=--no-deprecation next dev",
     "generate:importmap": "cross-env NODE_OPTIONS=--no-deprecation payload generate:importmap",
     "generate:types": "cross-env NODE_OPTIONS=--no-deprecation payload generate:types",
@@ -21,8 +21,8 @@
     "@payloadcms/richtext-lexical": "3.31.0",
     "cross-env": "^7.0.3",
     "graphql": "^16.8.1",
-    "next": "15.2.3",
-    "payload": "3.31.0",
+    "next": "^15.3.0",
+    "payload": "^3.34.0",
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "sharp": "0.32.6"
@@ -34,6 +34,7 @@
     "@types/react-dom": "19.0.4",
     "eslint": "^9.16.0",
     "eslint-config-next": "15.2.3",
+    "nodemon": "^3.1.9",
     "prettier": "^3.4.2",
     "typescript": "5.7.3"
   },
