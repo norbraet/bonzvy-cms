@@ -1,4 +1,11 @@
 import { CollectionConfig } from 'payload'
+import {
+  FixedToolbarFeature,
+  InlineToolbarFeature,
+  lexicalEditor,
+} from '@payloadcms/richtext-lexical'
+import { slugField } from '@/fields/slug'
+import { visibilityField } from '@/fields/visbility'
 
 export const License: CollectionConfig = {
   slug: 'license',
@@ -6,7 +13,7 @@ export const License: CollectionConfig = {
     useAsTitle: 'name',
     group: 'Licenses',
     description: '',
-    // defaultColumns: ['name', 'key', 'BPM', 'visibility', 'artwork'],
+    defaultColumns: ['name', 'description', 'price', 'slug', 'visibility'],
   },
   fields: [
     {
@@ -15,5 +22,27 @@ export const License: CollectionConfig = {
       type: 'text',
       required: true,
     },
+    {
+      name: 'description',
+      label: 'Description',
+      type: 'textarea',
+    },
+    {
+      name: 'price',
+      label: 'Price',
+      type: 'number',
+      required: true,
+    },
+    {
+      name: 'Terms of Use',
+      type: 'richText',
+      editor: lexicalEditor({
+        features: ({ rootFeatures }) => {
+          return [...rootFeatures, FixedToolbarFeature(), InlineToolbarFeature()]
+        },
+      }),
+    },
+    ...slugField('name'),
+    ...visibilityField(),
   ],
 }

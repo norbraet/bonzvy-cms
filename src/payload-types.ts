@@ -226,6 +226,7 @@ export interface License {
   } | null;
   slug?: string | null;
   slugLock?: boolean | null;
+  visibility?: ('public' | 'private' | 'draft') | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -501,6 +502,7 @@ export interface LicenseSelect<T extends boolean = true> {
   'Terms of Use'?: T;
   slug?: T;
   slugLock?: T;
+  visibility?: T;
   updatedAt?: T;
   createdAt?: T;
 }
