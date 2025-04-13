@@ -14,7 +14,7 @@ tasks:
     desc: Projet setup
     cmds:
       - echo "🛠 Initializing project setup..."
-      - task: ensure:lockfile
+      - task: ensure-lockfile
       - echo "🐳 Building Docker containers..."
       - docker compose build
       - echo "📦 Installing Node dependencies..."
