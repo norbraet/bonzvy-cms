@@ -15,6 +15,11 @@ export const License: CollectionConfig = {
     description: '',
     defaultColumns: ['name', 'description', 'price', 'slug', 'visibility'],
   },
+  hooks: {
+    afterChange: [
+      ({ doc }) => console.log('TODO: PDF generieren, nachdem die Terms gespeichert wurden'),
+    ],
+  },
   fields: [
     {
       name: 'name',

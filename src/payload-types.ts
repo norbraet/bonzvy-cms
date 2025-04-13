@@ -226,7 +226,7 @@ export interface License {
   } | null;
   slug?: string | null;
   slugLock?: boolean | null;
-  visibility?: ('public' | 'private' | 'draft') | null;
+  visibility: 'public' | 'private' | 'draft';
   updatedAt: string;
   createdAt: string;
 }
