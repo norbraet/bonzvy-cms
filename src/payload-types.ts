@@ -155,6 +155,9 @@ export interface Beat {
   wavUpload: string | MediaAudio;
   mp3Version?: (string | null) | MediaAudio;
   previewVersion?: (string | null) | MediaAudio;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  visibility: 'public' | 'private' | 'draft';
   updatedAt: string;
   createdAt: string;
 }
@@ -488,6 +491,9 @@ export interface BeatSelect<T extends boolean = true> {
   wavUpload?: T;
   mp3Version?: T;
   previewVersion?: T;
+  slug?: T;
+  slugLock?: T;
+  visibility?: T;
   updatedAt?: T;
   createdAt?: T;
 }

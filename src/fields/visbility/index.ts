@@ -15,6 +15,7 @@ export const visibilityField: VisibilityField = (overrides = {}) => {
     type: 'select',
     label: 'Visibility',
     options: visibilityOptions,
+    defaultValue: 'Draft',
     required: true,
     admin: {
       position: 'sidebar',
