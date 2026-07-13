@@ -30,11 +30,11 @@ cd bonzvy-cms
 Create a `.env` file in the root of the project directory and use the `.env.example` as a starting point.
 
 ### 3. Build Docker Containers
-Run the following task in order to start the setup:
+Run the following task to start the setup:
 ```
 task setup
 ```
-This will build the Docker containers and install necessary dependencies.
+This will build the Docker containers and install the necessary dependencies.
 
 ### 4. Start Docker Containers
 Once everything is set up, you can start the Docker containers with:
